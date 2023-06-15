@@ -12,7 +12,7 @@ const { connection } = require("../db");
 //     });
 // });
 
-module.exports.createTasks = async function(taskTitle, taskSubTitle = null) {
+module.exports.createTasks = async function (taskTitle, taskSubTitle = null) {
     if (taskSubTitle) {
         connection.query('INSERT INTO tasks (taskTitle, taskSubTitle) VALUES (?, ?)', [taskTitle, taskSubTitle], (error, results, fields) => {
             if (error) {
@@ -30,7 +30,8 @@ module.exports.createTasks = async function(taskTitle, taskSubTitle = null) {
     }
 };
 
-module.exports.updateTasks = async function(taskId, taskTitle = null, taskSubTitle = null) {
+module.exports.updateTasks = async function (taskId, taskTitle = null, taskSubTitle = null) {
+
     if (taskTitle && taskSubTitle) {
         connection.query('UPDATE tasks SET taskTitle = ?, taskSubTitle = ? WHERE tasksId = ?', [taskTitle, taskSubTitle, taskId], (error, results, fields) => {
             if (error) {
@@ -55,7 +56,7 @@ module.exports.updateTasks = async function(taskId, taskTitle = null, taskSubTit
     }
 }
 
-module.exports.deleteTasks = async function(taskId) {
+module.exports.deleteTasks = async function (taskId) {
     connection.query('DELETE FROM tasks WHERE tasksId = ?', [taskId], (error, results, fields) => {
         if (error) {
             throw error;
@@ -65,13 +66,13 @@ module.exports.deleteTasks = async function(taskId) {
 }
 
 module.exports.getAllTasks = async function () {
-    
+
     connection.query('SELECT * FROM tasks', (error, results, fields) => {
 
         if (error) {
             throw error;
-        }else{
-            data = JSON.parse(JSON.stringify(results))     
+        } else {
+            data = JSON.parse(JSON.stringify(results))
         }
 
     });

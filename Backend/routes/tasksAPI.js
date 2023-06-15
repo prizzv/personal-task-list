@@ -39,16 +39,17 @@ router.post("/", (req,res,next) => {
     
     createTasks(taskTitle, taskSubTitle);
     
-    res.status(200).json({ message: 'Paper inserted successfully.' });
+    res.status(200).json({ message: 'Task inserted successfully.' });
 })
 
 //update task
 router.put("/", (req,res,next) => {
     const { tasksId, taskTitle, taskSubTitle } = req.body;
-    // console.log(typeof(tasksId));
+    console.log(req.body);
+
     updateTasks(tasksId, taskTitle, taskSubTitle);
     
-    res.status(200).json({ message: 'Paper updated successfully.' });
+    res.status(200).json({ message: 'Task updated successfully.' });
 });
 
 //delete task
@@ -57,7 +58,7 @@ router.delete("/:id", (req,res,next) => {
     
     deleteTasks(id);
     
-    res.status(200).json({ message: 'Paper deleted successfully.' });
+    res.status(200).json({ message: 'Task deleted successfully.' });
 });
 
 module.exports = router;

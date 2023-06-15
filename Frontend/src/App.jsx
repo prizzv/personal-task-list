@@ -3,7 +3,8 @@ import React, { useState, useEffect } from "react";
 import { Navbar, Sidebar, TextBoxes } from "./components";
 import styles from "./style";
 
-const baseURL = "http://localhost:9000/testAPI";
+import {baseURL} from "./constants"
+
 // const baseURL = "https://jsonplaceholder.typicode.com/posts";
 
 
@@ -16,18 +17,34 @@ const baseURL = "http://localhost:9000/testAPI";
 
 const  App = () => {
   const [messages, setMessages] = useState([]);
+  const [tasksId, setTasksId] = useState(-1);
+  const [singleMessage, setSingleMessage] = useState([]);
+  
+  const getTasksId = (tasksId) => {
+    setTasksId(tasksId);
+    selectTask(tasksId);
+  }
 
   useEffect(() => {
     axios
-      .get(baseURL)
+      .get(`${baseURL}tasksAPI`)
       .then(result => {
         setMessages(result.data);
+        selectTask(result.data[0].tasksId);
         console.log(result.data);
       })
       .catch(error => console.log(error));
   }, []);
 
-  // if(!message) return null;
+  const selectTask = (id) => {
+    axios
+      .get(`${baseURL}tasksAPI/${id}`)
+      .then(result => {
+        setSingleMessage(result.data);
+        console.log(result.data);
+      })
+      .catch(error => console.log(error));
+  }
 
   return (
     <div className="bg-primary w-full overflow-hidden">
@@ -36,8 +53,8 @@ const  App = () => {
       </div>
 
       <div className={`bg-primary w-full h-screen flex justify-between`}>
-        <Sidebar />
-        <TextBoxes />
+        <Sidebar messages={messages} getTasksId = {getTasksId}/>
+        <TextBoxes singleMessage = {singleMessage}/>
       </div>
 
 
