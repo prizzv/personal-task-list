@@ -6,45 +6,43 @@ import { useState, useEffect } from 'react'
 const TextBoxes = ({ singleMessage }) => {
   const [taskTitle, setTaskTitle] = useState('');
   const [taskSubTitle, setTaskSubTitle] = useState('');
-  const [query, setQuery] = useState('');
 
   useEffect(() => {
     const timeOutId = setTimeout(() => {
+      if (singleMessage[0] != null) {
+        if (taskTitle != '') {
+          singleMessage[0].taskTitle = taskTitle;
+          // console.log(singleMessage);
+        }
+        if (taskSubTitle != '') {
+          singleMessage[0].taskSubTitle = taskSubTitle;
+        }
 
-      if (taskTitle != '') {
-        singleMessage[0].taskTitle = taskTitle;
-        // console.log(singleMessage);
+        console.log(singleMessage);
+        updateTasks();
       }
-      if (taskSubTitle != '') {
-        singleMessage[0].taskSubTitle = taskSubTitle;
-      }
-      console.log(singleMessage);
-      updateTasks();
     }, 3000);
-
 
     return () => clearTimeout(timeOutId)
   }, [taskTitle, taskSubTitle])
 
   const updateTasks = () => {
     // console.log(singleMessage);
-    if (singleMessage != []) {
 
-      const options = {
-        method: 'PUT',
-        url: `${baseURL}tasksAPI/`,
-        params: { 'api': '1.0' },
-        headers: { 'content-type': 'application/json' },
-        data: singleMessage[0]
-      }
-
-      axios
-        .request(options)
-        .then(response => {
-          console.log(response.data);
-        })
-        .catch(error => console.log(error));
+    const options = {
+      method: 'PUT',
+      url: `${baseURL}tasksAPI/`,
+      params: { 'api': '1.0' },
+      headers: { 'content-type': 'application/json' },
+      data: singleMessage[0]
     }
+
+    axios
+      .request(options)
+      .then(response => {
+        console.log(response.data);
+      })
+      .catch(error => console.log(error));
   }
 
   return (
