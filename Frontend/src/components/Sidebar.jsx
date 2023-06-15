@@ -20,19 +20,9 @@ const Sidebar = ({ messages, selectTask, createNewTask }) => {
       .catch(err => { console.log(err) });
 
     createNewTask(messages);
-    console.log(messages)
+    window.location.reload();
+    // console.log(messages)
   }
-  // console.log(messages);
-
-  // useEffect(() => {
-  //   axios
-  //     .get(baseURL)
-  //     .then(result => {
-  //       setSingleMessage(result.data);
-  //       console.log(result.data);
-  //     })
-  //     .catch(error => console.log(error));
-  // }, []);
 
   return (
     <div className='ss:w-[40%] w-[60%] text-white relative max-h-[100%] overflow-auto border-r-2 border-slate-500'>

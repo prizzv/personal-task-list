@@ -2,6 +2,8 @@ import React from 'react'
 import { baseURL } from '../constants';
 import axios from "axios"
 import { useState, useEffect } from 'react'
+import { Button } from "../components";
+import {trashCan} from "../assets"
 
 const TextBoxes = ({ singleMessage }) => {
   const [taskTitle, setTaskTitle] = useState('');
@@ -44,6 +46,10 @@ const TextBoxes = ({ singleMessage }) => {
       })
       .catch(error => console.log(error));
   }
+  const deleteTask = () => {
+    axios.delete(`${baseURL}tasksAPI/${singleMessage[0].tasksId}`)
+    window.location.reload();
+  }
 
   return (
 
@@ -60,7 +66,9 @@ const TextBoxes = ({ singleMessage }) => {
           <div className='w-full'>
             <textarea type={"text"} id="review-text" className="autosize  w-full bg-inherit mx-5 py-2 text-lg" wrap='soft' defaultValue={`${message.taskSubTitle}`} onChange={(event) => (setTaskSubTitle(event.target.value))}></textarea>
           </div>
-
+          <button type="button" className={`absolute right-10 rounded-full  w-[50px] h-[50px] text-[30px] flex justify-center items-center bg-red-gradient font-bold `} onClick={()=> {deleteTask()}}>
+            <img src={trashCan} alt="trash_can" className='object-contain'/>
+          </button>
         </div>
       ))}
     </div>

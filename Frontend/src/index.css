@@ -51,6 +51,18 @@
   );
 }
 
+.bg-red-gradient {
+  background: linear-gradient(
+    157.81deg,
+    #e6dfdf -43.27%,
+    #ccadb4 -21.24%,
+    #ce9595 12.19%,
+    #d47676 29.82%,
+    #e22c2c 51.94%,
+    #e20a0a 90.29%
+  );
+}
+
 .bg-black-gradient {
   background: linear-gradient(
     144.39deg,
