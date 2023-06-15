@@ -13,56 +13,70 @@ const { connection } = require("../db");
 // });
 
 module.exports.createTasks = async function (taskTitle, taskSubTitle = null) {
-    if (taskSubTitle) {
-        connection.query('INSERT INTO tasks (taskTitle, taskSubTitle) VALUES (?, ?)', [taskTitle, taskSubTitle], (error, results, fields) => {
-            if (error) {
-                throw error;
-            }
-            console.log(results);
-        });
-    } else {
-        connection.query('INSERT INTO tasks (taskTitle) VALUES (?)', [taskTitle], (error, results, fields) => {
-            if (error) {
-                throw error;
-            };
-            console.log(results);
-        });
+    try {
+        if (taskSubTitle) {
+            connection.query('INSERT INTO tasks (taskTitle, taskSubTitle) VALUES (?, ?)', [taskTitle, taskSubTitle], (error, results, fields) => {
+                if (error) {
+                    throw error;
+                }
+                console.log(results);
+            });
+        } else {
+            connection.query('INSERT INTO tasks (taskTitle) VALUES (?)', [taskTitle], (error, results, fields) => {
+                if (error) {
+                    throw error;
+                };
+                console.log(results);
+            });
+        }
+    } catch (error) {
+        console.log(error);
     }
 };
 
 module.exports.updateTasks = async function (taskId, taskTitle = null, taskSubTitle = null) {
+    try {
 
-    if (taskTitle && taskSubTitle) {
-        connection.query('UPDATE tasks SET taskTitle = ?, taskSubTitle = ? WHERE tasksId = ?', [taskTitle, taskSubTitle, taskId], (error, results, fields) => {
-            if (error) {
-                throw error;
-            }
-            console.log(results);
-        });
-    } else if (taskTitle) {
-        connection.query('UPDATE tasks SET taskTitle = ? WHERE tasksId = ?', [taskTitle, taskId], (error, results, fields) => {
-            if (error) {
-                throw error;
-            }
-            console.log(results);
-        });
-    } else {
-        connection.query('UPDATE tasks SET taskSubTitle = ? WHERE tasksId = ?', [taskSubTitle, taskId], (error, results, fields) => {
-            if (error) {
-                throw error;
-            }
-            console.log(results);
-        });
+        if (taskTitle && taskSubTitle) {
+            connection.query('UPDATE tasks SET taskTitle = ?, taskSubTitle = ? WHERE tasksId = ?', [taskTitle, taskSubTitle, taskId], (error, results, fields) => {
+                if (error) {
+                    throw error;
+                }
+                console.log(results);
+            });
+        } else if (taskTitle) {
+            connection.query('UPDATE tasks SET taskTitle = ? WHERE tasksId = ?', [taskTitle, taskId], (error, results, fields) => {
+                if (error) {
+                    throw error;
+                }
+                console.log(results);
+            });
+        } else {
+            connection.query('UPDATE tasks SET taskSubTitle = ? WHERE tasksId = ?', [taskSubTitle, taskId], (error, results, fields) => {
+                if (error) {
+                    throw error;
+                }
+                console.log(results);
+            });
+        }
+    } catch (error) {
+        console.log(error);
     }
 }
 
 module.exports.deleteTasks = async function (taskId) {
-    connection.query('DELETE FROM tasks WHERE tasksId = ?', [taskId], (error, results, fields) => {
-        if (error) {
-            throw error;
-        }
-        console.log(results);
-    });
+    try {
+        connection.query('DELETE FROM tasks WHERE tasksId = ?', [taskId], (error, results, fields) => {
+            if (error) {
+                throw error;
+            }
+            console.log(results);
+        });
+
+    } catch (error) {
+        console.log(error);
+    }
+
 }
 
 module.exports.getAllTasks = async function () {

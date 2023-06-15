@@ -3,26 +3,17 @@ import React, { useState, useEffect } from "react";
 import { Navbar, Sidebar, TextBoxes } from "./components";
 import styles from "./style";
 
-import {baseURL} from "./constants"
+import { baseURL } from "./constants"
 
-// const baseURL = "https://jsonplaceholder.typicode.com/posts";
-
-
-// callAPI(() => {
-//   axios.get(baseURL)
-//     .then(res => res.text())
-//     .then(res => this.setState({ apiResponse: res }))
-//     .catch(err => err);
-// });
-
-const  App = () => {
+const App = () => {
   const [messages, setMessages] = useState([]);
-  const [tasksId, setTasksId] = useState(-1);
   const [singleMessage, setSingleMessage] = useState([]);
-  
-  const getTasksId = (tasksId) => {
-    setTasksId(tasksId);
-    selectTask(tasksId);
+
+  const createNewTask = (tasks) => {
+    console.log("createNewTask");
+
+    console.log(tasks);
+    setMessages(tasks);
   }
 
   useEffect(() => {
@@ -49,12 +40,12 @@ const  App = () => {
   return (
     <div className="bg-primary w-full overflow-hidden">
       <div className={``}>
-          <Navbar />
+        <Navbar />
       </div>
 
       <div className={`bg-primary w-full h-screen flex justify-between`}>
-        <Sidebar messages={messages} getTasksId = {getTasksId}/>
-        <TextBoxes singleMessage = {singleMessage}/>
+        <Sidebar messages={messages} selectTask={selectTask} createNewTask={createNewTask} />
+        <TextBoxes singleMessage={singleMessage} />
       </div>
 
 
