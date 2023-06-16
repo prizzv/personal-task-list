@@ -1,5 +1,10 @@
 # Personal task list with auto save.
 
+This is a simple project to create tasks and sub tasks, created using new functional React.js Tailwind CSS and Vite for better and faster frontend development.
+
+In the backend I have used Node.js Express and MySQL as the server and database respectively. Proper error handling is being carried out in the creation of the backend and sufficient care is being taken to reduce the API calls.
+
+
 ## The tech stack used in this project is as follows
 
 Frontend - HTML, CSS, JavaScript, React.js, Tailwind CSS.
@@ -8,7 +13,7 @@ Backend - MySQL, Node.js, Express.js.
 
 ## Running the backend server
 
-### create a db.js file in Backend folder and write the below code for making the SQL connection
+### Create a db.js file in Backend folder and write the below code to make SQL connection
 
 ``` javascript
 var connection = mysql.createConnection({
@@ -18,6 +23,7 @@ var connection = mysql.createConnection({
     database: 'databasename'
 });
 ```
+
 
 ## Gallery
 
