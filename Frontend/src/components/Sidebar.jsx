@@ -9,7 +9,7 @@ import TextBoxes from "./TextBoxes";
 
 const Sidebar = ({ messages, selectTask, createNewTask }) => {
   const addTask = () => {
-    //FIXME: UI update is not working
+    //DONE: UI update is not working
     messages.push({
       tasksId: messages[messages.length - 1].tasksId + 1,
       taskTitle: "New Task",
@@ -29,7 +29,7 @@ const Sidebar = ({ messages, selectTask, createNewTask }) => {
       {/* shows tasks title and sub title */}
       <div className="flex justify-center flex-col items-center">
         {messages.map((message, index) => (
-          <div key={message.tasksId} id={`${message.tasksId} tasks`} className={`w-[90%] ${styles.padding} flex flex-col bg-black-gradient-2 rounded-[20px] box-shadow ${index === 0 ? "my-6" : "my-3"}`} onClick={() => selectTask(message.tasksId)}>
+          <div key={message.tasksId} id={`${message.tasksId} tasks`} className={`w-[90%] ${styles.padding} flex flex-col bg-black-gradient-2 rounded-[20px] box-shadow ${index === 0 ? "my-6" : "my-3"} cursor-pointer`} onClick={() => selectTask(message.tasksId)}>
             <p className="pb-3">{message.taskTitle}</p>
             <p>{message.taskSubTitle}</p>
           </div>
